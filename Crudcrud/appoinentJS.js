@@ -7,7 +7,7 @@ function saveToLocalStorage(event) {
       Uemail,
     };
 
-axios.post("https://crudcrud.com/api/2d03bfd62c044fa58f2fdd5f3ee16228/BookingData",UserDetail)
+axios.post("https://crudcrud.com/api/7a1f98d6aa914494bcf61924d9d94186/BookingData",UserDetail)
 .then((response) => {
     detailsAtDOM(response.data);
     // console.log(response.data);
@@ -22,14 +22,26 @@ axios.post("https://crudcrud.com/api/2d03bfd62c044fa58f2fdd5f3ee16228/BookingDat
   }
   
   window.addEventListener("DOMContentLoaded", () => {
-    const localStorageObj = localStorage;
-    const localStoragekeys = Object.keys(localStorageObj);
-    for (var i = 0; i < localStoragekeys.length; i++) {
-      const key = localStoragekeys[i];
-      const userDetailsString = localStorageObj[key];
-      const userDetailsObj = JSON.parse(userDetailsString);
-      detailsAtDOM(userDetailsObj);
-    }
+    axios
+    .get("https://crudcrud.com/api/7a1f98d6aa914494bcf61924d9d94186/BookingData")
+    .then((response) => {
+        console.log(response);
+
+        for(var i=0; i<response.data.length; i++){
+            detailsAtDOM(response.data[i]);
+        }
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+    // const localStorageObj = localStorage;
+    // const localStoragekeys = Object.keys(localStorageObj);
+    // for (var i = 0; i < localStoragekeys.length; i++) {
+    //   const key = localStoragekeys[i];
+    //   const userDetailsString = localStorageObj[key];
+    //   const userDetailsObj = JSON.parse(userDetailsString);
+    //   detailsAtDOM(userDetailsObj);
+    // }
   });
   
   function detailsAtDOM(User) {
