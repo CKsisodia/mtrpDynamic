@@ -45,9 +45,13 @@ axios.post("https://crudcrud.com/api/020bd40879f1469fadb9c7f888864d60/BookingDat
   });
   
   function detailsAtDOM(User) {
+
+    document.getElementById('name').value = "";
+    document.getElementById('email').value = "";
+
     const parentNode = document.getElementById("list");
     const childHTML = `<li id='${User._id}'> ${User.Uname} - ${User.Uemail} 
-       <button onclick=editUser('${User.Uemail}','${User.Uname}') style='background-color:green; font-weight:bold; border-color:yellow;
+       <button onclick=editUser('${User.Uemail}','${User.Uname}','${User._id}') style='background-color:green; font-weight:bold; border-color:yellow;
                                 font-size:15px; font-style:italic;'>Edit</button> 
       <button onclick=deleteUser('${User._id}') style='background-color:red; font-weight:bold; font-weight:bold; border-color:yellow;
                                 font-size:15px; font-style:italic'>Delete</button> 
@@ -74,7 +78,8 @@ axios.post("https://crudcrud.com/api/020bd40879f1469fadb9c7f888864d60/BookingDat
     parentNode.removeChild(childNodeToBeDeleted);
   }
   
-  function editUser(emailId,username){
+  function editUser(emailId,username, userId){
+
     document.getElementById('name').value = username;
     document.getElementById('email').value = emailId;
   
